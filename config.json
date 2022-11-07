@@ -5,6 +5,6 @@
     "WindowMode": 0,
     "VSync": 0,
     "RefreshRate": 165,
-    "Backend": Vulkan
+    "Backend": "Vulkan"
   }
 }
