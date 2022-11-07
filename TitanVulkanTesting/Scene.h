@@ -6,17 +6,22 @@
 #include <iostream>
 #include <fstream>
 
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include "GLFW/glfw3native.h"
-#include "nlohmann/json.hpp"
+#include "BGFXRenderer.h"
+#include "entt/entt.hpp"
 
 class Scene
 {
 public:
-	int CreateWindow();
-private:
-	bool USE_OPENGL;
+	//entt::registry registry;
+	BGFXRenderer* renderer = new BGFXRenderer();
+
+	void Update();
+
+	int SceneCreateWindow();
+
+	void CreateEntity();
+
+	void DeleteEntity();
 };
 	
 // TODO: Reference additional headers your program requires here.
