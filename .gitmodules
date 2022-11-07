@@ -7,3 +7,6 @@
 [submodule "3rdparty/bgfx.cmake"]
 	path = 3rdparty/bgfx.cmake
 	url = https://github.com/bkaradzic/bgfx.cmake
+[submodule "3rdparty/json"]
+	path = 3rdparty/json
+	url = https://github.com/nlohmann/json
