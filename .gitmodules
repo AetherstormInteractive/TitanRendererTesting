@@ -1,0 +1,9 @@
+[submodule "3rdparty/glfw"]
+	path = 3rdparty/glfw
+	url = https://github.com/AetherstormRepo/glfw
+[submodule "3rdparty/entt"]
+	path = 3rdparty/entt
+	url = https://github.com/AetherstormRepo/entt
+[submodule "3rdparty/bgfx.cmake"]
+	path = 3rdparty/bgfx.cmake
+	url = https://github.com/bkaradzic/bgfx.cmake
