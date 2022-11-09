@@ -3,6 +3,8 @@
 int main()
 {
 	Scene* scene = new Scene();
-	scene->SceneCreateWindow();
+	scene->SceneStart();
+	scene->SceneUpdate();
+	scene->SceneEnd();
 	return 0;
 }

@@ -3,24 +3,40 @@
 
 #include "Scene.h"
 
-using json = nlohmann::json;
 
-void Scene::Update()
+void Scene::SceneUpdate()
 {
+
+	bgfx::ProgramHandle shader;
+	auto view = registry.view<Model>();
+
+	while (!glfwWindowShouldClose(window))
+	{
+		for (auto entity : view)
+		{
+			auto& model = view.get<Model>(entity);
+			renderer->Draw(model, shader);
+		}
+		renderer->Run(j);
+		if (glfwGetKey(window, GLFW_KEY_F1))
+		{
+			break;
+		}
+		glfwPollEvents();
+	}
 }
 
-	int Scene::SceneCreateWindow()
+	int Scene::SceneStart()
 	{
 		glfwInit();
-		GLFWwindow* window;
 
-		std::ifstream i("config.json");
-		json j;
+		std::ifstream i("config.ini");
+
 		i >> j;
 
 		if (j["Display"]["WindowMode"] == 1)
 		{
-			window = glfwCreateWindow(j["Display"]["FullscreenWidth"], j["Display"]["FullscreenHeight"], "Title", glfwGetPrimaryMonitor(), NULL);
+			window = glfwCreateWindow(j["Display"]["FullscreenWidth"], j["Display"]["FullscreenHeight"], "TitanRendererTesting", glfwGetPrimaryMonitor(), NULL);
 		}
 		else
 		{
@@ -37,13 +53,22 @@ void Scene::Update()
 		
 		renderer->Setup(window, j);
 
-	
+		SceneUpdate();
+		return 0;
+	}
 
-		while (!glfwWindowShouldClose(window))
-		{
-			renderer->Run(j);
-			glfwPollEvents();
-		}
+	int Scene::SceneEnd()
+	{
 		glfwTerminate();
 		return 0;
+	}
+
+	void Scene::CreateEntity(entt::entity entity)
+	{
+		entity = registry.create();
+	}
+
+	void Scene::DeleteEntity(entt::entity entity)
+	{
+		registry.destroy(entity);
 	}
