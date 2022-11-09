@@ -5,23 +5,28 @@
 
 #include <iostream>
 #include <fstream>
-
-#include "BGFXRenderer.h"
 #include "entt/entt.hpp"
+#include "BGFXRenderer.h"
+
+using json = nlohmann::json;
 
 class Scene
 {
 public:
-	//entt::registry registry;
+	entt::registry registry;
 	BGFXRenderer* renderer = new BGFXRenderer();
+	json j;
+	GLFWwindow* window;
 
-	void Update();
+	void SceneUpdate();
 
-	int SceneCreateWindow();
+	int SceneStart();
 
-	void CreateEntity();
+	int SceneEnd();
 
-	void DeleteEntity();
+	void CreateEntity(entt::entity entity);
+
+	void DeleteEntity(entt::entity entity);
 };
 	
 // TODO: Reference additional headers your program requires here.
