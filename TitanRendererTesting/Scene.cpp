@@ -1,74 +1,93 @@
-﻿// TitanVulkanTesting.cpp : Defines the entry point for the application.
-//
+﻿#include "Scene.h"
 
-#include "Scene.h"
-
-
-void Scene::SceneUpdate()
+bool is_fullscreen;
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-
-	bgfx::ProgramHandle shader;
-	auto view = registry.view<Model>();
-
-	while (!glfwWindowShouldClose(window))
+	std::ifstream i("config.ini");
+	json configFile;
+	i >> configFile;
+	if (key == GLFW_KEY_F11 && action == GLFW_PRESS)
 	{
-		for (auto entity : view)
-		{
-			auto& model = view.get<Model>(entity);
-			renderer->Draw(model, shader);
-		}
-		renderer->Run(j);
-		if (glfwGetKey(window, GLFW_KEY_F1))
-		{
-			break;
-		}
-		glfwPollEvents();
+		is_fullscreen = !is_fullscreen;
+		glfwSetWindowMonitor(window, is_fullscreen ? glfwGetPrimaryMonitor() : NULL, 500, 300,
+			is_fullscreen ? configFile["Display"]["FullscreenWidth"] : configFile["Display"]["WindowedWidth"], 
+			is_fullscreen ? configFile["Display"]["FullscreenHeight"] : configFile["Display"]["WindowedHeight"], 
+			configFile["Display"]["RefreshRate"]);
+	}
+
+	if (key == GLFW_KEY_F1 && action == GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose(window, true);
 	}
 }
 
-	int Scene::SceneStart()
+int Scene::SceneStart()
+{
+	std::ifstream i("config.ini");
+	i >> configFile;
+	is_fullscreen = configFile["Display"]["isFullscreen"];
+
+	glfwInit();
+
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+
+	window = glfwCreateWindow(
+		is_fullscreen ? configFile["Display"]["FullscreenWidth"] : configFile["Display"]["WindowedWidth"],
+		is_fullscreen ? configFile["Display"]["FullscreenHeight"] : configFile["Display"]["WindowedHeight"],
+		"TitanRendererTesting", 
+		is_fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
+
+	glfwWindowHint(GLFW_REFRESH_RATE, configFile["Display"]["RefreshRate"]);
+
+	if (window == nullptr)
 	{
-		glfwInit();
+		return -1;
+	}
 
-		std::ifstream i("config.ini");
+	glfwSetKeyCallback(window, key_callback);
 
-		i >> j;
+	renderer.Setup(window, configFile, is_fullscreen);
 
-		if (j["Display"]["WindowMode"] == 1)
+	SceneUpdate();
+	return 0;
+}
+
+void Scene::SceneUpdate()
+{
+	while (!glfwWindowShouldClose(window))
+	{
+		renderer.Run(configFile, is_fullscreen);
+
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	} // game loop
+}
+
+int Scene::SceneEnd()
+{
+	for (int i = 0; i <= sizeof(entities); i++)
+	{
+		if (entities.empty())
 		{
-			window = glfwCreateWindow(j["Display"]["FullscreenWidth"], j["Display"]["FullscreenHeight"], "TitanRendererTesting", glfwGetPrimaryMonitor(), NULL);
+			break;
 		}
-		else
-		{
-			window = glfwCreateWindow(j["Display"]["WindowedWidth"], j["Display"]["WindowedHeight"], "TitanRendererTesting", NULL, NULL);
-		}
-		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-
-		glfwWindowHint(GLFW_REFRESH_RATE, j["Display"]["RefreshRate"]);
-
-		if (window == nullptr)
-		{
-			return -1;
-		}
-		
-		renderer->Setup(window, j);
-
-		SceneUpdate();
-		return 0;
+		registry.destroy(entities[i]);
 	}
+	bgfx::shutdown();
+	glfwTerminate();
+	return 0;
+}
 
-	int Scene::SceneEnd()
-	{
-		glfwTerminate();
-		return 0;
-	}
+void Scene::CreateEntity(entt::entity entity)
+{
+	entity = registry.create(); // add entity to scene registry
+	entities.push_back(entity); //add entity for universal use
+}
 
-	void Scene::CreateEntity(entt::entity entity)
-	{
-		entity = registry.create();
-	}
+void Scene::DeleteEntity(entt::entity entity)
+{
+	registry.destroy(entity); // remove entity from scene registry
+	entities.erase(std::remove(entities.begin(), entities.end(), entity), entities.end()); //delete entity with iterator
+}
 
-	void Scene::DeleteEntity(entt::entity entity)
-	{
-		registry.destroy(entity);
-	}
+

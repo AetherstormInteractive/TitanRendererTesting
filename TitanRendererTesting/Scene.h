@@ -1,32 +1,27 @@
-﻿// TitanVulkanTesting.h : Include file for standard system include files,
-// or project specific include files.
-
-#pragma once
-
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
-#include "entt/entt.hpp"
-#include "BGFXRenderer.h"
+
+#include <entt/entt.hpp>
+
+#include "Backend/BGFX/BGFXRenderer.h"
 
 using json = nlohmann::json;
-
 class Scene
 {
 public:
+	json configFile;
 	entt::registry registry;
-	BGFXRenderer* renderer = new BGFXRenderer();
-	json j;
+	Renderer::BGFXRenderer renderer;
 	GLFWwindow* window;
-
-	void SceneUpdate();
+	bool is_fullscreen = false;
 
 	int SceneStart();
-
+	void SceneUpdate();
 	int SceneEnd();
 
 	void CreateEntity(entt::entity entity);
-
 	void DeleteEntity(entt::entity entity);
+
+private:
+	std::vector<entt::entity> entities;
 };
-	
-// TODO: Reference additional headers your program requires here.

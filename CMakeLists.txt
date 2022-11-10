@@ -9,6 +9,6 @@ add_subdirectory("3rdparty/json")
 add_subdirectory("3rdparty/bgfx.cmake")
 add_subdirectory("3rdparty/glad")
 add_subdirectory("3rdparty/entt")
-
-
-
+add_subdirectory("3rdparty/glm")
+add_subdirectory("3rdparty/assimp")
+add_subdirectory("3rdparty/tinyobj")
