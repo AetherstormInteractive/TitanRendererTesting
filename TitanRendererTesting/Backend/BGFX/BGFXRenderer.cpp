@@ -1,5 +1,7 @@
 #include "BGFXRenderer.h"
 
+#define WINDOWS
+
 namespace Renderer
 {
 	int BGFXRenderer::Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen)
@@ -12,7 +14,16 @@ namespace Renderer
 		bgfx::Init init;
 		init.type = bgfx::RendererType::Count;
 		init.vendorId = m_pciId;
+#ifdef WINDOWS
 		init.platformData.nwh = glfwGetWin32Window(win);
+#elif LINUX
+	#ifdef X11
+		init.platformData.nwh = glfwGetX11Window(win);
+	#else
+		init.platformData.nwh = glfwGetWaylandWindow(win);
+	#endif
+#endif
+
 		init.platformData.ndt = glfwGetPrimaryMonitor();
 
 		init.resolution.width = is_fullscreen ? configFile["Display"]["FullscreenWidth"] : configFile["Display"]["WindowedWidth"];

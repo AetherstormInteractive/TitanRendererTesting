@@ -14,7 +14,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 			is_fullscreen ? configFile["Display"]["FullscreenHeight"] : configFile["Display"]["WindowedHeight"], 
 			configFile["Display"]["RefreshRate"]);
 	}
-
+	configFile["Display"]["isFullscreen"] = is_fullscreen;
 	if (key == GLFW_KEY_F1 && action == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, true);
