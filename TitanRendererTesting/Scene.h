@@ -3,7 +3,8 @@
 
 #include <entt/entt.hpp>
 
-#include "Backend/BGFX/BGFXRenderer.h"
+//#include "Backend/BGFX/BGFXRenderer.h"
+#include "Backend/OpenGL/OpenGLRenderer.h"
 
 using json = nlohmann::json;
 class Scene
@@ -11,7 +12,8 @@ class Scene
 public:
 	json configFile;
 	entt::registry registry;
-	Renderer::BGFXRenderer renderer;
+	//Renderer::BGFXRenderer renderer;
+	OpenGLRenderer renderer;
 	GLFWwindow* window;
 	bool is_fullscreen = false;
 

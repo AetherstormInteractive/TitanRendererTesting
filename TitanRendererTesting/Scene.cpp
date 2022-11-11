@@ -1,5 +1,7 @@
 ﻿#include "Scene.h"
 
+#define USE_OPENGL
+
 bool is_fullscreen;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -29,7 +31,13 @@ int Scene::SceneStart()
 
 	glfwInit();
 
+#ifdef USE_OPENGL
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#else
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+#endif
 
 	window = glfwCreateWindow(
 		is_fullscreen ? configFile["Display"]["FullscreenWidth"] : configFile["Display"]["WindowedWidth"],
@@ -73,7 +81,7 @@ int Scene::SceneEnd()
 		}
 		registry.destroy(entities[i]);
 	}
-	bgfx::shutdown();
+	//bgfx::shutdown();
 	glfwTerminate();
 	return 0;
 }

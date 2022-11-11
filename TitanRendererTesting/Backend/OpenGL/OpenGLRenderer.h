@@ -18,14 +18,6 @@ class OpenGLRenderer
 {
 
 public:
-	OpenGLRenderer()
-	{
-
-	}
-
-	Camera camera;
-	Renderer::Backend::OpenGL::OpenGLModel* model;
-	Shader shader;
-	int Setup(GLFWwindow* win, nlohmann::json configFile);
-	void Run(nlohmann::json configFile);
+	int Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen);
+	void Run(nlohmann::json configFile, bool is_fullscreen);
 };
