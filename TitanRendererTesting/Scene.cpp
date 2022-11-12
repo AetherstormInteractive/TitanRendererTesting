@@ -1,8 +1,22 @@
 ﻿#include "Scene.h"
 
-#define USE_OPENGL
-
 bool is_fullscreen;
+
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+#if defined(USE_OPENGL)
+	glViewport(0, 0, width, height);
+#elif defined(USE_D3D11)
+
+#elif defined(USE_D3D12)
+
+#elif defined(USE_VULKAN)
+
+#elif defined(USE_METAL)
+
+#endif
+}
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	std::ifstream i("config.ini");
@@ -32,9 +46,9 @@ int Scene::SceneStart()
 	glfwInit();
 
 #ifdef USE_OPENGL
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #else
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 #endif
@@ -51,10 +65,10 @@ int Scene::SceneStart()
 	{
 		return -1;
 	}
-
-	glfwSetKeyCallback(window, key_callback);
-
 	renderer.Setup(window, configFile, is_fullscreen);
+
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetKeyCallback(window, key_callback);
 
 	SceneUpdate();
 	return 0;
@@ -81,7 +95,6 @@ int Scene::SceneEnd()
 		}
 		registry.destroy(entities[i]);
 	}
-	//bgfx::shutdown();
 	glfwTerminate();
 	return 0;
 }

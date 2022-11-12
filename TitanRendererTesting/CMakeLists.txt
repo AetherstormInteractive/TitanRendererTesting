@@ -5,11 +5,14 @@ cmake_minimum_required (VERSION 3.8)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMake/")
 # Add source to this project's executable.
 add_executable (TitanRendererTesting "Scene.cpp" "Scene.h" "main.cpp" "../3rdparty/glad/src/glad.c"
-"Backend/BGFX/BGFXRenderer.cpp" "Backend/BGFX/BGFXRenderer.h" "Backend/BGFX/BGFXModel.cpp" "Backend/BGFX/BGFXModel.h" "Backend/BGFX/BGFXMesh.cpp" "Backend/BGFX/BGFXMesh.h"
-"Backend/OpenGL/OpenGLRenderer.cpp" "Backend/OpenGL/OpenGLRenderer.h" "Backend/OpenGL/OpenGLModel.cpp" "Backend/OpenGL/OpenGLModel.h" "Backend/OpenGL/OpenGLMesh.cpp" "Backend/OpenGL/OpenGLMesh.h" "Backend/OpenGL/OpenGLShader.h" "Backend/OpenGL/OpenGLCamera.h"
+									 "Backend/OpenGL/OpenGLRenderer.cpp" "Backend/OpenGL/OpenGLRenderer.h"
+									 "Backend/D3D11/D3D11Renderer.cpp" "Backend/D3D11/D3D11Renderer.h"
+									 "Backend/D3D12/D3D12Renderer.cpp" "Backend/D3D12/D3D12Renderer.h"
+									 "Backend/Vulkan/VulkanRenderer.cpp" "Backend/Vulkan/VulkanRenderer.h"
+									 "Backend/Metal/MetalRenderer.cpp" "Backend/Metal/MetalRenderer.h"
 )
 
-target_link_libraries(TitanRendererTesting glfw nlohmann_json bgfx bx bimg glad EnTT glm assimp tinyobjloader)
+target_link_libraries(TitanRendererTesting glfw nlohmann_json glad EnTT glm assimp tinyobjloader)
 
 include_directories(${CMAKE_SOURCE_DIR}/3rdparty/stb)
 link_directories(${CMAKE_SOURCE_DIR}/3rdparty/stb) 

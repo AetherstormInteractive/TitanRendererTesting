@@ -1,9 +1,6 @@
 #include "OpenGLRenderer.h"
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	glViewport(0, 0, width, height);
-}
+using namespace Renderer;
 
 int OpenGLRenderer::Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen)
 {
@@ -13,8 +10,6 @@ int OpenGLRenderer::Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fu
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
-
-	glfwSetFramebufferSizeCallback(win, framebuffer_size_callback);
     return 0;
 }
 

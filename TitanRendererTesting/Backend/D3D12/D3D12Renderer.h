@@ -1,10 +1,9 @@
-#ifndef OPENGL_RENDERER_H
-#define OPENGL_RENDERER_H
+#ifndef D3D12_RENDERER_H
+#define D3D12_RENDERER_H
 
 #include <cstdio>
 #include <iostream>
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
@@ -15,7 +14,7 @@
 
 namespace Renderer
 {
-	class OpenGLRenderer
+	class D3D12Renderer
 	{
 	public:
 		int Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen);

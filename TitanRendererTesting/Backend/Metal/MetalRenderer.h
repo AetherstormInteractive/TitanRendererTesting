@@ -1,10 +1,9 @@
-#ifndef OPENGL_RENDERER_H
-#define OPENGL_RENDERER_H
+#ifndef METAL_RENDERER_H
+#define METAL_RENDERER_H
 
 #include <cstdio>
 #include <iostream>
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
@@ -15,7 +14,7 @@
 
 namespace Renderer
 {
-	class OpenGLRenderer
+	class MetalRenderer
 	{
 	public:
 		int Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen);

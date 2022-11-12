@@ -4,9 +4,6 @@
 [submodule "3rdparty/entt"]
 	path = 3rdparty/entt
 	url = https://github.com/AetherstormRepo/entt
-[submodule "3rdparty/bgfx.cmake"]
-	path = 3rdparty/bgfx.cmake
-	url = https://github.com/AetherstormRepo/bgfx.cmake
 [submodule "3rdparty/json"]
 	path = 3rdparty/json
 	url = https://github.com/AetherstormRepo/json
