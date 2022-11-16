@@ -3,7 +3,6 @@
 
 #include <entt/entt.hpp>
 
-#define USE_OPENGL
 #if defined(USE_OPENGL)
 #include "Backend/OpenGL/OpenGLRenderer.h"
 #elif defined(USE_D3D11)
