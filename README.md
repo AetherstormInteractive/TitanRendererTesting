@@ -12,23 +12,23 @@ Vulkan
 Metal
 
 Planned Features (Unordered):
-Model Loading for all major formats
-Animation Support
-Materials
-Skyboxes
-Cubemaps
-Light Objects
-Scene Graph
-Physically Based Camera
-Post Processing Filters
-IBL
-Frustrum Culling
-Installing
-Batch Rendering 
-Deferred Shading
-Shadow mapping
-HDR
-Physically Based Rendering
-Terrain and Tesselation
-Custom Universal Shaders
-Anti Aliasing
+Model Loading for all major formats  
+Animation Support  
+Materials  
+Skyboxes  
+Cubemaps  
+Light Objects  
+Scene Graph  
+Physically Based Camera  
+Post Processing Filters  
+IBL  
+Frustrum Culling  
+Installing  
+Batch Rendering   
+Deferred Shading  
+Shadow mapping  
+HDR  
+Physically Based Rendering  
+Terrain and Tesselation  
+Custom Universal Shaders  
+Anti Aliasing  
