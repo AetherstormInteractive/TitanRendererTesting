@@ -4,17 +4,7 @@ bool is_fullscreen;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-#if defined(USE_OPENGL)
-	glViewport(0, 0, width, height);
-#elif defined(USE_D3D11)
 
-#elif defined(USE_D3D12)
-
-#elif defined(USE_VULKAN)
-
-#elif defined(USE_METAL)
-
-#endif
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -53,24 +43,7 @@ int Scene::SceneStart()
 	std::ifstream i("config.ini");
 	i >> configFile;
 	is_fullscreen = configFile["Display"]["isFullscreen"];
-        switch (configFile["Display"]["Backend"])
-        {
-                case "OpenGL":
-#define USE_OPENGL
-                        break;
-                case "Vulkan":
-#define USE_VULKAN
-                        break;
-                case "DirectX11":
-#define USE_D3D11
-                        break;
-                case "DirectX12":
-#define USE_D3D12
-                        break;
-                case "Metal":
-#define USE_METAL
-                        break;
-        }   
+
 	glfwInit();
 
 #ifdef USE_OPENGL
