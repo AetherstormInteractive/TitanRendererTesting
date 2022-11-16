@@ -1,8 +1,7 @@
 #include "OpenGLRenderer.h"
 
-using namespace Renderer;
 
-int OpenGLRenderer::Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen)
+int OpenGLRenderer::Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen) 
 {
 	glfwMakeContextCurrent(win);
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -10,6 +9,7 @@ int OpenGLRenderer::Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fu
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
+	glViewport(0, 0, configFile["Display"]["Width"], configFile["Display"]["Height"]);
     return 0;
 }
 

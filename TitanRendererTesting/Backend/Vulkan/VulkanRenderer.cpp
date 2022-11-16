@@ -1,6 +1,5 @@
 #include "VulkanRenderer.h"
 
-using namespace Renderer;
 
 int VulkanRenderer::Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen)
 {

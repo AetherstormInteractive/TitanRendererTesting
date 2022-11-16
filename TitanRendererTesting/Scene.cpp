@@ -2,11 +2,6 @@
 
 bool is_fullscreen;
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-
-}
-
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	std::ifstream i("config.ini");
@@ -40,11 +35,15 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 int Scene::SceneStart()
 {
+
 	std::ifstream i("config.ini");
 	i >> configFile;
 	is_fullscreen = configFile["Display"]["isFullscreen"];
 
 	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	window = glfwCreateWindow(
 		configFile["Display"]["Width"],
@@ -58,9 +57,9 @@ int Scene::SceneStart()
 	{
 		return -1;
 	}
-	renderer.Setup(window, configFile, is_fullscreen);
 
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	api->Setup(window, configFile, is_fullscreen);
+
 	glfwSetKeyCallback(window, key_callback);
 
 	SceneUpdate();
@@ -71,7 +70,7 @@ void Scene::SceneUpdate()
 {
 	while (!glfwWindowShouldClose(window))
 	{
-		renderer.Run(configFile, is_fullscreen);
+		api->Run(configFile, is_fullscreen);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

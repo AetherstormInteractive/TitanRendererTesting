@@ -1,6 +1,3 @@
-#ifndef OPENGL_RENDERER_H
-#define OPENGL_RENDERER_H
-
 #include <cstdio>
 #include <iostream>
 
@@ -13,13 +10,11 @@
 
 #include <nlohmann/json.hpp>
 
-namespace Renderer
-{
-	class OpenGLRenderer
+#include "../../Renderer.h"
+
+class OpenGLRenderer : public Renderer
 	{
 	public:
 		int Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen);
 		void Run(nlohmann::json configFile, bool is_fullscreen);
 	};
-}
-#endif
