@@ -44,7 +44,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	configFile["Display"]["isFullscreen"] = is_fullscreen;
 	if (key == GLFW_KEY_F1 && action == GLFW_PRESS)
 	{
-		glfwSetWindowShouldClose(window, true);
+	        glfwSetWindowShouldClose(window, true);
 	}
 }
 
@@ -53,7 +53,24 @@ int Scene::SceneStart()
 	std::ifstream i("config.ini");
 	i >> configFile;
 	is_fullscreen = configFile["Display"]["isFullscreen"];
-
+        switch (configFile["Display"]["Backend"])
+        {
+                case "OpenGL":
+#define USE_OPENGL
+                        break;
+                case "Vulkan":
+#define USE_VULKAN
+                        break;
+                case "DirectX11":
+#define USE_D3D11
+                        break;
+                case "DirectX12":
+#define USE_D3D12
+                        break;
+                case "Metal":
+#define USE_METAL
+                        break;
+        }   
 	glfwInit();
 
 #ifdef USE_OPENGL
