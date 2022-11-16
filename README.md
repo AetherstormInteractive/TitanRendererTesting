@@ -11,7 +11,7 @@ DirectX12
 Vulkan  
 Metal  
 
-Planned Features (Unordered):
+Planned Features (Unordered):  
 Model Loading for all major formats  
 Animation Support  
 Materials  
