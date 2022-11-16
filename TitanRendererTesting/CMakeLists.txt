@@ -4,7 +4,7 @@
 cmake_minimum_required (VERSION 3.8)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMake/")
 # Add source to this project's executable.
-add_executable (TitanRendererTesting "Scene.cpp" "Scene.h" "main.cpp" "../3rdparty/glad/src/glad.c"
+add_executable (TitanRendererTesting "Scene.cpp" "Scene.h" "main.cpp" "../3rdparty/glad/src/glad.c" "Renderer.cpp" "Renderer.h"
 									 "Backend/OpenGL/OpenGLRenderer.cpp" "Backend/OpenGL/OpenGLRenderer.h"
 									 "Backend/D3D11/D3D11Renderer.cpp" "Backend/D3D11/D3D11Renderer.h"
 									 "Backend/D3D12/D3D12Renderer.cpp" "Backend/D3D12/D3D12Renderer.h"
