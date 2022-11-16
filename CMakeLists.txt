@@ -11,3 +11,9 @@ add_subdirectory("3rdparty/entt")
 add_subdirectory("3rdparty/glm")
 add_subdirectory("3rdparty/assimp")
 add_subdirectory("3rdparty/tinyobj")
+
+set_target_properties(TitanRendererTesting glfw nlohmann_json glad EnTT glm assimp tinyobjloader PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin"
+)

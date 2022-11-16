@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /3rdparty/SDL2
 /shaders
 /resources
+/lib

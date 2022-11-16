@@ -26,9 +26,20 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 		is_fullscreen = !is_fullscreen;
 		glfwSetWindowMonitor(window, is_fullscreen ? glfwGetPrimaryMonitor() : NULL, 500, 300,
-			is_fullscreen ? configFile["Display"]["FullscreenWidth"] : configFile["Display"]["WindowedWidth"], 
-			is_fullscreen ? configFile["Display"]["FullscreenHeight"] : configFile["Display"]["WindowedHeight"], 
+			configFile["Display"]["Width"],
+			configFile["Display"]["Height"],
 			configFile["Display"]["RefreshRate"]);
+
+		std::ifstream in("config.ini");
+		json infile = json::parse(in);
+
+		infile["Display"]["isFullscreen"] = is_fullscreen;
+
+		std::ofstream out("config.ini");
+		out << std::setw(4) << infile << std::endl;
+
+		in.close();
+		out.close();
 	}
 	configFile["Display"]["isFullscreen"] = is_fullscreen;
 	if (key == GLFW_KEY_F1 && action == GLFW_PRESS)
@@ -54,8 +65,8 @@ int Scene::SceneStart()
 #endif
 
 	window = glfwCreateWindow(
-		is_fullscreen ? configFile["Display"]["FullscreenWidth"] : configFile["Display"]["WindowedWidth"],
-		is_fullscreen ? configFile["Display"]["FullscreenHeight"] : configFile["Display"]["WindowedHeight"],
+		configFile["Display"]["Width"],
+		configFile["Display"]["Height"],
 		"TitanRendererTesting", 
 		is_fullscreen ? glfwGetPrimaryMonitor() : NULL, NULL);
 
