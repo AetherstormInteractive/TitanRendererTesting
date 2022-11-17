@@ -9,7 +9,8 @@ Future Support:
 DirectX11  
 DirectX12  
 Vulkan  
-Metal  
+Metal
+OpenGL ES 3.1 
 
 Planned Features (Unordered):  
 Model Loading for all major formats  
