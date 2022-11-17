@@ -1,8 +1,9 @@
 #include "VulkanRenderer.h"
 
 
-int VulkanRenderer::Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen)
+int VulkanRenderer::Setup(SDL_Window* win, nlohmann::json configFile, bool is_fullscreen)
 {
+	std::cout << "Vulkan Initialization" << std::endl;
 	return 0;
 }
 

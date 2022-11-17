@@ -3,8 +3,8 @@
 
 #include <cstdio>
 #include <iostream>
-
-#include <GLFW/glfw3.h>
+#include <SDL.h>
+#undef main
 #include <nlohmann/json.hpp>
 
 #include "../../Renderer.h"
@@ -12,7 +12,7 @@
 class MetalRenderer : public Renderer
 {
 public:
-	int Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen);
+	int Setup(SDL_Window* win, nlohmann::json configFile, bool is_fullscreen);
 	void Run(nlohmann::json configFile, bool is_fullscreen);
 };
 #endif

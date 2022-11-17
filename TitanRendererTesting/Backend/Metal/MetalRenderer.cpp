@@ -1,7 +1,7 @@
 #include "MetalRenderer.h"
 
 
-int MetalRenderer::Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen)
+int MetalRenderer::Setup(SDL_Window* win, nlohmann::json configFile, bool is_fullscreen)
 {
 	return 0;
 }

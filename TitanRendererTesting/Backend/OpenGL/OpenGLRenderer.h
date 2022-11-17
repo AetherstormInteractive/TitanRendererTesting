@@ -2,8 +2,8 @@
 #include <iostream>
 
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
+#include <SDL.h>
+#undef main
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -15,6 +15,6 @@
 class OpenGLRenderer : public Renderer
 	{
 	public:
-		int Setup(GLFWwindow* win, nlohmann::json configFile, bool is_fullscreen);
+		int Setup(SDL_Window* win, nlohmann::json configFile, bool is_fullscreen);
 		void Run(nlohmann::json configFile, bool is_fullscreen);
 	};

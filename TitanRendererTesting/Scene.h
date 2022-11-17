@@ -3,6 +3,7 @@
 
 #include <nlohmann/json.hpp>
 #include <entt/entt.hpp>
+#include <SDL.h>
 
 #include "Backend/OpenGL/OpenGLRenderer.h"
 #include "Backend/Vulkan/VulkanRenderer.h"
@@ -20,17 +21,19 @@ public:
 	json configFile;
 
 	Renderer* api = nullptr;
+	OpenGLRenderer* openglrenderer = new OpenGLRenderer();
+	VulkanRenderer* vulkanrenderer = new VulkanRenderer();
 	Scene()
 	{
 		std::ifstream i("config.ini");
 		i >> configFile;
 		if (configFile["Display"]["Backend"] == "OpenGL")
 		{
-			api = new OpenGLRenderer();
+			api = openglrenderer;
 		}
 		else if (configFile["Display"]["Backend"] == "Vulkan")
 		{
-			api = new VulkanRenderer();
+			api = vulkanrenderer;
 		}
 		else if (configFile["Display"]["Backend"] == "DirectX11")
 		{
@@ -48,7 +51,9 @@ public:
 	
 	entt::registry registry;
 
-	GLFWwindow* window;
+	SDL_Window* window;
+	SDL_Surface* screenSurface;
+
 	bool is_fullscreen = false;
 
 	int SceneStart();

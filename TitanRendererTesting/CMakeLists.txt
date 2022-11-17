@@ -14,7 +14,7 @@ add_executable (TitanRendererTesting "Scene.cpp" "Scene.h" "main.cpp" "../3rdpar
 									 "Backend/Metal/MetalRenderer.cpp" "Backend/Metal/MetalRenderer.h"
   "Renderer.h" "Renderer.cpp")
 
-target_link_libraries(TitanRendererTesting glfw nlohmann_json glad EnTT glm assimp tinyobjloader SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries(TitanRendererTesting nlohmann_json glad EnTT glm assimp tinyobjloader SDL2::SDL2 SDL2::SDL2main)
 
 include_directories(${CMAKE_SOURCE_DIR}/3rdparty/stb)
 link_directories(${CMAKE_SOURCE_DIR}/3rdparty/stb) 
