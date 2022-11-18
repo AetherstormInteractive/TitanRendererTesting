@@ -10,3 +10,8 @@ void D3D11Renderer::Run(nlohmann::json configFile, bool is_fullscreen)
 {
 
 }
+
+void D3D11Renderer::Shutdown()
+{
+
+}

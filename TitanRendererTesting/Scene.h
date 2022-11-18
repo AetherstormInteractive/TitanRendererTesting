@@ -23,6 +23,9 @@ public:
 	Renderer* api = nullptr;
 	OpenGLRenderer* openglrenderer = new OpenGLRenderer();
 	VulkanRenderer* vulkanrenderer = new VulkanRenderer();
+	D3D11Renderer* d3d11renderer = new D3D11Renderer();
+	D3D12Renderer* d3d12renderer = new D3D12Renderer();
+	MetalRenderer* metalrenderer = new MetalRenderer();
 	Scene()
 	{
 		std::ifstream i("config.ini");
@@ -37,15 +40,15 @@ public:
 		}
 		else if (configFile["Display"]["Backend"] == "DirectX11")
 		{
-			api = new D3D11Renderer();
+			api = d3d11renderer;
 		}
 		else if (configFile["Display"]["Backend"] == "DirectX12")
 		{
-			api = new D3D12Renderer();
+			api = d3d12renderer;
 		}
 		else if (configFile["Display"]["Backend"] == "Metal")
 		{
-			api = new MetalRenderer();
+			api = metalrenderer;
 		}
 	}
 	

@@ -9,3 +9,8 @@ void D3D12Renderer::Run(nlohmann::json configFile, bool is_fullscreen)
 {
 
 }
+
+void D3D12Renderer::Shutdown()
+{
+
+}

@@ -14,5 +14,6 @@ class D3D11Renderer : public Renderer
 public:
 	int Setup(SDL_Window* win, nlohmann::json configFile, bool is_fullscreen);
 	void Run(nlohmann::json configFile, bool is_fullscreen);
+	void Shutdown();
 };
 #endif

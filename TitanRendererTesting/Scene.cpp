@@ -111,6 +111,7 @@ int Scene::SceneEnd()
 	SDL_DestroyWindow(window);
 	//Quit SDL subsystems
 	SDL_Quit();
+	api->Shutdown();
 
 	return 0;
 }

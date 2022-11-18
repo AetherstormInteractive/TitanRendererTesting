@@ -10,3 +10,8 @@ void MetalRenderer::Run(nlohmann::json configFile, bool is_fullscreen)
 {
 
 }
+
+void MetalRenderer::Shutdown()
+{
+
+}

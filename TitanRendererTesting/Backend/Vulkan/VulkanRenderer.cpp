@@ -11,3 +11,8 @@ void VulkanRenderer::Run(nlohmann::json configFile, bool is_fullscreen)
 {
 
 }
+
+void VulkanRenderer::Shutdown()
+{
+
+}
