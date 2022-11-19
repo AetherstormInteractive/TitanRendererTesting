@@ -5,11 +5,11 @@ Testing for the renderer portion of the Aetherstorm Titan engine
 Current Support:  
 OpenGL 4.5  
 
-Future Support:  
+Future Support (Unordered):  
 DirectX11  
 DirectX12  
 Vulkan  
-Metal
+Metal  
 OpenGL ES 3.1 
 
 Planned Features (Unordered):  
