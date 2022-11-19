@@ -5,6 +5,7 @@ int OpenGLRenderer::Setup(SDL_Window* win, nlohmann::json configFile, bool is_fu
 {
 	std::cout << "OpenGL Initialization" << std::endl;
 	gContext = SDL_GL_CreateContext(win);
+
 	if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
 	{
 		std::cout << "Failed to initialize GLAD" << std::endl;
@@ -59,8 +60,8 @@ void OpenGLRenderer::Run(nlohmann::json configFile, bool is_fullscreen)
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
-void OpenGLRenderer::Shutdown() {
-
+void OpenGLRenderer::Shutdown()
+{
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 }

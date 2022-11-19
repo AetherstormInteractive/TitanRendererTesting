@@ -1,4 +1,7 @@
-﻿#include <iostream>
+﻿#ifndef SCENE_H
+#define SCENE_H
+
+#include <iostream>
 #include <fstream>
 
 #include <nlohmann/json.hpp>
@@ -26,6 +29,7 @@ public:
 	D3D11Renderer* d3d11renderer = new D3D11Renderer();
 	D3D12Renderer* d3d12renderer = new D3D12Renderer();
 	MetalRenderer* metalrenderer = new MetalRenderer();
+
 	Scene()
 	{
 		std::ifstream i("config.ini");
@@ -54,8 +58,8 @@ public:
 	
 	entt::registry registry;
 
-	SDL_Window* window;
-	SDL_Surface* screenSurface;
+	SDL_Window* window = nullptr;
+	SDL_Surface* screenSurface = nullptr;
 
 	bool is_fullscreen = false;
 
@@ -69,3 +73,4 @@ public:
 private:
 	std::vector<entt::entity> entities;
 };
+#endif

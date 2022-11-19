@@ -3,8 +3,10 @@
 
 #include <cstdio>
 #include <iostream>
+
 #include <SDL.h>
 #undef main
+
 #include <nlohmann/json.hpp>
 
 #include "../../Renderer.h"

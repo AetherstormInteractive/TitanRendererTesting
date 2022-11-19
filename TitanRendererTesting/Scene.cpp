@@ -1,7 +1,5 @@
 ﻿#include "Scene.h"
 
-bool is_fullscreen;
-
 //void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 //{
 //	std::ifstream i("config.ini");
@@ -33,12 +31,12 @@ bool is_fullscreen;
 //	}
 //}
 
+bool is_fullscreen;
 SDL_Event e;
 bool quit = false;
 
 int Scene::SceneStart()
 {
-
 	std::ifstream i("config.ini");
 	i >> configFile;
 	is_fullscreen = configFile["Display"]["isFullscreen"];
@@ -49,7 +47,6 @@ int Scene::SceneStart()
 	}
 	else
 	{
-
 		//Create window
 		if (api == openglrenderer)
 		{
@@ -68,27 +65,25 @@ int Scene::SceneStart()
 		{
 			window = SDL_CreateWindow("Titan Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, configFile["Display"]["Width"], configFile["Display"]["Height"], SDL_WINDOW_VULKAN | SDL_WINDOW_SHOWN);
 		}
+
 		api->Setup(window, configFile, is_fullscreen);
 	}
 
-	SceneUpdate();
 	return 0;
 }
 
 void Scene::SceneUpdate()
 {
-	while (quit == false) 
+	while (!quit) 
 	{
-
 		api->Run(configFile, is_fullscreen);
+
 		if (api == openglrenderer)
 		{
 			SDL_GL_SwapWindow(window);
 		}
-		else
-		{
+		else { }
 
-		}
 		while (SDL_PollEvent(&e)) 
 		{
 			if (e.type == SDL_QUIT)
@@ -108,9 +103,11 @@ int Scene::SceneEnd()
 			registry.destroy(entities[i]);
 		}
 	}
-	SDL_DestroyWindow(window);
+
 	//Quit SDL subsystems
+	SDL_DestroyWindow(window);
 	SDL_Quit();
+
 	api->Shutdown();
 
 	return 0;
