@@ -10,8 +10,11 @@
 class Renderer
 {
 public:
-	virtual int Setup(SDL_Window* win, nlohmann::json configFile, bool is_fullscreen) = 0;
-	virtual void Run(nlohmann::json configFile, bool is_fullscreen) = 0;
+	virtual int Initialize(nlohmann::json configFile, bool is_fullscreen) = 0;
+	virtual void Update(nlohmann::json configFile, bool is_fullscreen) = 0;
 	virtual void Shutdown() = 0;
+
+	SDL_Window* window = nullptr;
+	SDL_Surface* screenSurface = nullptr;
 };
 #endif

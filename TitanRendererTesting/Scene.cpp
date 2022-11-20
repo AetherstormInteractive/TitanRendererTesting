@@ -47,26 +47,7 @@ int Scene::SceneStart()
 	}
 	else
 	{
-		//Create window
-		if (api == openglrenderer)
-		{
-			SDL_GL_LoadLibrary(NULL);
-			// Request an OpenGL 4.5 context (should be core)
-			SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
-			// Also request a depth buffer
-			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-			SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-
-			window = SDL_CreateWindow("Titan Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, configFile["Display"]["Width"], configFile["Display"]["Height"], SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-		}
-		else if (api == vulkanrenderer)
-		{
-			window = SDL_CreateWindow("Titan Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, configFile["Display"]["Width"], configFile["Display"]["Height"], SDL_WINDOW_VULKAN | SDL_WINDOW_SHOWN);
-		}
-
-		api->Setup(window, configFile, is_fullscreen);
+		api->Initialize(configFile, is_fullscreen);
 	}
 
 	return 0;
@@ -76,13 +57,7 @@ void Scene::SceneUpdate()
 {
 	while (!quit) 
 	{
-		api->Run(configFile, is_fullscreen);
-
-		if (api == openglrenderer)
-		{
-			SDL_GL_SwapWindow(window);
-		}
-		else { }
+		api->Update(configFile, is_fullscreen);
 
 		while (SDL_PollEvent(&e)) 
 		{
@@ -104,11 +79,10 @@ int Scene::SceneEnd()
 		}
 	}
 
-	//Quit SDL subsystems
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+	//Quit SDL subsystem
 
 	api->Shutdown();
+	SDL_Quit();
 
 	return 0;
 }

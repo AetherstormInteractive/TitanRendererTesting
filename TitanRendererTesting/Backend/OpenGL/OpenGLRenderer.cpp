@@ -1,10 +1,22 @@
 #include "OpenGLRenderer.h"
 
 
-int OpenGLRenderer::Setup(SDL_Window* win, nlohmann::json configFile, bool is_fullscreen)
+int OpenGLRenderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 {
+
+	SDL_GL_LoadLibrary(NULL);
+	// Request an OpenGL 4.5 context (should be core)
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
+	// Also request a depth buffer
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
+	window = SDL_CreateWindow("OpenGL Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, configFile["Display"]["Width"], configFile["Display"]["Height"], SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+
 	std::cout << "OpenGL Initialization" << std::endl;
-	gContext = SDL_GL_CreateContext(win);
+	gContext = SDL_GL_CreateContext(window);
 
 	if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
 	{
@@ -50,7 +62,7 @@ int OpenGLRenderer::Setup(SDL_Window* win, nlohmann::json configFile, bool is_fu
     return 0;
 }
 
-void OpenGLRenderer::Run(nlohmann::json configFile, bool is_fullscreen)
+void OpenGLRenderer::Update(nlohmann::json configFile, bool is_fullscreen)
 {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -58,10 +70,12 @@ void OpenGLRenderer::Run(nlohmann::json configFile, bool is_fullscreen)
 	glUseProgram(shaderProgram);
 	glBindVertexArray(VAO);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+	SDL_GL_SwapWindow(window);
 }
 
 void OpenGLRenderer::Shutdown()
 {
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
+	SDL_DestroyWindow(window);
 }

@@ -14,6 +14,7 @@ add_executable (TitanRendererTesting "Scene.cpp" "Scene.h" "main.cpp" "../3rdpar
 									 "Backend/D3D12/D3D12Renderer.cpp" "Backend/D3D12/D3D12Renderer.h"
 									 "Backend/Vulkan/VulkanRenderer.cpp" "Backend/Vulkan/VulkanRenderer.h"
 									 "Backend/Metal/MetalRenderer.cpp" "Backend/Metal/MetalRenderer.h"
+									 "Backend/SDL2/SDL2Renderer.cpp" "Backend/SDL2/SDL2Renderer.h"
 )
 
 

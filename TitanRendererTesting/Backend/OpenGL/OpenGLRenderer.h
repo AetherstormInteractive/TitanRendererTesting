@@ -19,8 +19,8 @@
 class OpenGLRenderer : public Renderer
 {
 public:
-	int Setup(SDL_Window* win, nlohmann::json configFile, bool is_fullscreen);
-	void Run(nlohmann::json configFile, bool is_fullscreen);
+	int Initialize(nlohmann::json configFile, bool is_fullscreen);
+	void Update(nlohmann::json configFile, bool is_fullscreen);
 	void Shutdown();
 private:
 float vertices[9] = {
