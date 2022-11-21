@@ -1,10 +1,19 @@
 #include "SDL2Renderer.h"
 
-
 int SDL2Renderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 {
-	window = SDL_CreateWindow("SDL2 Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, configFile["Display"]["Width"], configFile["Display"]["Height"], SDL_WINDOW_SHOWN);
-	std::cout << "SDL2 Initialization" << std::endl;
+	window = SDL_CreateWindow("SDL2 Renderer", SDL_WINDOWPOS_CENTERED, 50, configFile["Display"]["Width"], configFile["Display"]["Height"], SDL_WINDOW_SHOWN);
+
+	if (window == NULL)
+	{
+		std::cout << "ERROR: No SDL2 API Found!" << std::endl;
+		return -1;
+	}
+	else
+	{
+		std::cout << "SDL2 Initialization" << std::endl;
+	}
+
 	return 0;
 }
 

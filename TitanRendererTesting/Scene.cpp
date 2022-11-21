@@ -1,37 +1,5 @@
 ﻿#include "Scene.h"
 
-//void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-//{
-//	std::ifstream i("config.ini");
-//	json configFile;
-//	i >> configFile;
-//	if (key == GLFW_KEY_F11 && action == GLFW_PRESS)
-//	{
-//		is_fullscreen = !is_fullscreen;
-//		glfwSetWindowMonitor(window, is_fullscreen ? glfwGetPrimaryMonitor() : NULL, 500, 300,
-//			configFile["Display"]["Width"],
-//			configFile["Display"]["Height"],
-//			configFile["Display"]["RefreshRate"]);
-//
-//		std::ifstream in("config.ini");
-//		json infile = json::parse(in);
-//
-//		infile["Display"]["isFullscreen"] = is_fullscreen;
-//
-//		std::ofstream out("config.ini");
-//		out << std::setw(4) << infile << std::endl;
-//
-//		in.close();
-//		out.close();
-//	}
-//	configFile["Display"]["isFullscreen"] = is_fullscreen;
-//	if (key == GLFW_KEY_F1 && action == GLFW_PRESS)
-//	{
-//	        glfwSetWindowShouldClose(window, true);
-//	}
-//}
-
-bool is_fullscreen;
 SDL_Event e;
 bool quit = false;
 
@@ -65,11 +33,14 @@ void Scene::SceneUpdate()
 			{
 				quit = true;
 			}
-			if (e.type == SDL_KEYDOWN) {
-				switch (e.key.keysym.sym) {
+			if (e.type == SDL_KEYDOWN)
+			{
+				switch (e.key.keysym.sym)
+				{
 				case SDLK_F11:
 					is_fullscreen = !is_fullscreen;
 					break;
+
 				case SDLK_F1:
 					quit = true;
 					break;
