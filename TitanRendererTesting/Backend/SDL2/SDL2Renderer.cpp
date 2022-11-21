@@ -2,7 +2,7 @@
 
 int SDL2Renderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 {
-	window = SDL_CreateWindow("SDL2 Renderer", SDL_WINDOWPOS_CENTERED, 50, configFile["Display"]["Width"], configFile["Display"]["Height"], SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("SDL2 Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, configFile["Display"]["Width"], configFile["Display"]["Height"], SDL_WINDOW_SHOWN);
 
 	if (window == NULL)
 	{
