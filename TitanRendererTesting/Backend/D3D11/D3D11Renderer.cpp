@@ -10,7 +10,7 @@ int D3D11Renderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 
 void D3D11Renderer::Update(nlohmann::json configFile, bool is_fullscreen)
 {
-
+	SDL_SetWindowFullscreen(window, is_fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
 }
 
 void D3D11Renderer::Shutdown()

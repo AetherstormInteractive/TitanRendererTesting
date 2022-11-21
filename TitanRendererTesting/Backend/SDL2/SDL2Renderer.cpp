@@ -10,7 +10,7 @@ int SDL2Renderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 
 void SDL2Renderer::Update(nlohmann::json configFile, bool is_fullscreen)
 {
-
+	SDL_SetWindowFullscreen(window, is_fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
 }
 
 void SDL2Renderer::Shutdown()

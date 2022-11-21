@@ -58,12 +58,12 @@ int OpenGLRenderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 	// 3. then set our vertex attributes pointers
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-
     return 0;
 }
 
 void OpenGLRenderer::Update(nlohmann::json configFile, bool is_fullscreen)
 {
+	SDL_SetWindowFullscreen(window, is_fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 

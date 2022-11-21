@@ -65,6 +65,16 @@ void Scene::SceneUpdate()
 			{
 				quit = true;
 			}
+			if (e.type == SDL_KEYDOWN) {
+				switch (e.key.keysym.sym) {
+				case SDLK_F11:
+					is_fullscreen = !is_fullscreen;
+					break;
+				case SDLK_F1:
+					quit = true;
+					break;
+				}
+			}
 		}
 	}
 }

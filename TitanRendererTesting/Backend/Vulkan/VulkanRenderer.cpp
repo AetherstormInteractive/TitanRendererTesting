@@ -10,7 +10,7 @@ int VulkanRenderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 
 void VulkanRenderer::Update(nlohmann::json configFile, bool is_fullscreen)
 {
-
+	SDL_SetWindowFullscreen(window, is_fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
 }
 
 void VulkanRenderer::Shutdown()
