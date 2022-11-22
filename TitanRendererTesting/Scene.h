@@ -22,6 +22,9 @@ class Scene
 {
 public:
 	json configFile;
+	bool is_fullscreen = false;
+
+	entt::registry registry;
 
 	Renderer* api = nullptr;
 	OpenGLRenderer* openglrenderer = new OpenGLRenderer();
@@ -55,10 +58,6 @@ public:
 			api = sdl2renderer;
 		}
 	}
-	
-	entt::registry registry;
-
-	bool is_fullscreen = false;
 
 	int SceneStart();
 	void SceneUpdate();
