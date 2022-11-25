@@ -12,6 +12,7 @@
 #include "Backend/D3D11/D3D11Renderer.h"
 #include "Backend/D3D12/D3D12Renderer.h"
 #include "Backend/SDL2/SDL2Renderer.h"
+#include "Backend/Metal/MetalRenderer.h"
 #include "Renderer.h"
 
 
@@ -31,11 +32,15 @@ public:
 	D3D11Renderer* d3d11renderer = new D3D11Renderer();
 	D3D12Renderer* d3d12renderer = new D3D12Renderer();
 	SDL2Renderer* sdl2renderer = new SDL2Renderer();
+	MetalRenderer* metalrenderer = new MetalRenderer();
+
+	std::string configPath = "config/engineConfig.ini";
 
 	Scene()
 	{
-		std::ifstream i("config.ini");
+		std::ifstream i(configPath);
 		i >> configFile;
+
 		if (configFile["Display"]["Backend"] == "OpenGL")
 		{
 			api = openglrenderer;
@@ -52,12 +57,17 @@ public:
 		{
 			api = d3d12renderer;
 		}
+		else if (configFile["Display"]["Backend"] == "Metal")
+		{
+			api = metalrenderer;
+		}
 		else if (configFile["Display"]["Backend"] == "SDL2")
 		{
 			api = sdl2renderer;
 		}
 	}
 
+	void processInput();
 	int SceneStart();
 	void SceneUpdate();
 	int SceneEnd();

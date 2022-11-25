@@ -3,9 +3,37 @@
 SDL_Event e;
 bool quit = false;
 
+void Scene::processInput() {
+	while (SDL_PollEvent(&e))
+	{
+		if (e.type == SDL_QUIT)
+		{
+			quit = true;
+		}
+		if (e.type == SDL_KEYDOWN)
+		{
+			switch (e.key.keysym.sym)
+			{
+			case SDLK_F11:
+				is_fullscreen = !is_fullscreen;
+				break;
+			case SDLK_F5:
+				api->Shutdown();
+				api = nullptr;
+				api = vulkanrenderer;
+				api->Initialize(configFile, is_fullscreen);
+				break;
+			case SDLK_F1:
+				quit = true;
+				break;
+			}
+		}
+	}
+}
+
 int Scene::SceneStart()
 {
-	std::ifstream i("config.ini");
+	std::ifstream i(configPath);
 	i >> configFile;
 	is_fullscreen = configFile["Display"]["isFullscreen"];
 	api->Initialize(configFile, is_fullscreen);
@@ -19,31 +47,7 @@ void Scene::SceneUpdate()
 	{
 		api->Update(configFile, is_fullscreen);
 
-		while (SDL_PollEvent(&e)) 
-		{
-			if (e.type == SDL_QUIT)
-			{
-				quit = true;
-			}
-			if (e.type == SDL_KEYDOWN)
-			{
-				switch (e.key.keysym.sym)
-				{
-				case SDLK_F11:
-					is_fullscreen = !is_fullscreen;
-					break;
-				case SDLK_F5:
-					api->Shutdown();
-					api = nullptr;
-					api = vulkanrenderer;
-					api->Initialize(configFile, is_fullscreen);
-					break;
-				case SDLK_F1:
-					quit = true;
-					break;
-				}
-			}
-		}
+		processInput();
 	}
 }
 
