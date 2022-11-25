@@ -2,6 +2,11 @@
 
 int OpenGLRenderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 {
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+	}
+
 	SDL_GL_LoadLibrary(NULL);
 	// Request an OpenGL 4.5 context (should be core)
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
@@ -84,4 +89,5 @@ void OpenGLRenderer::Shutdown()
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 	SDL_DestroyWindow(window);
+	SDL_Quit();
 }

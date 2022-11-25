@@ -2,6 +2,11 @@
 
 int D3D11Renderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 {
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+	}
+
 	window = SDL_CreateWindow("DirectX11 Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, configFile["Display"]["Width"], configFile["Display"]["Height"], SDL_WINDOW_SHOWN);
 
 	if (window == NULL)
@@ -24,5 +29,5 @@ void D3D11Renderer::Update(nlohmann::json configFile, bool is_fullscreen)
 
 void D3D11Renderer::Shutdown()
 {
-
+	SDL_Quit();
 }

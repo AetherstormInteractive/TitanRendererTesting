@@ -8,15 +8,7 @@ int Scene::SceneStart()
 	std::ifstream i("config.ini");
 	i >> configFile;
 	is_fullscreen = configFile["Display"]["isFullscreen"];
-
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-	}
-	else
-	{
-		api->Initialize(configFile, is_fullscreen);
-	}
+	api->Initialize(configFile, is_fullscreen);
 
 	return 0;
 }
@@ -40,7 +32,12 @@ void Scene::SceneUpdate()
 				case SDLK_F11:
 					is_fullscreen = !is_fullscreen;
 					break;
-
+				case SDLK_F5:
+					api->Shutdown();
+					api = nullptr;
+					api = vulkanrenderer;
+					api->Initialize(configFile, is_fullscreen);
+					break;
 				case SDLK_F1:
 					quit = true;
 					break;
@@ -63,7 +60,6 @@ int Scene::SceneEnd()
 	//Quit SDL subsystem
 
 	api->Shutdown();
-	SDL_Quit();
 
 	return 0;
 }

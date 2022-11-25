@@ -6,7 +6,6 @@
 
 #include <nlohmann/json.hpp>
 #include <entt/entt.hpp>
-#include <SDL.h>
 
 #include "Backend/OpenGL/OpenGLRenderer.h"
 #include "Backend/Vulkan/VulkanRenderer.h"
