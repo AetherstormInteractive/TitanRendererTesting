@@ -1,6 +1,6 @@
 #include "MetalRenderer.h"
 
-int MetalRenderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
+int MetalRenderer::Initialize(nlohmann::json configFile, int windowMode)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -22,9 +22,19 @@ int MetalRenderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 	return 0;
 }
 
-void MetalRenderer::Update(nlohmann::json configFile, bool is_fullscreen)
+void MetalRenderer::Update(nlohmann::json configFile, int windowMode)
 {
-	SDL_SetWindowFullscreen(window, is_fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
+	switch (windowMode) {
+	case 0:
+		SDL_SetWindowFullscreen(window, 0);
+		break;
+	case 1:
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+		break;
+	case 2:
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		break;
+	}
 }
 
 void MetalRenderer::Shutdown()

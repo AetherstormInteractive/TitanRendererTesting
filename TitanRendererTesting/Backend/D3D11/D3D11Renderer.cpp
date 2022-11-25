@@ -1,6 +1,6 @@
 #include "D3D11Renderer.h"
 
-int D3D11Renderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
+int D3D11Renderer::Initialize(nlohmann::json configFile, int windowMode)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -22,9 +22,19 @@ int D3D11Renderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 	return 0;
 }
 
-void D3D11Renderer::Update(nlohmann::json configFile, bool is_fullscreen)
+void D3D11Renderer::Update(nlohmann::json configFile, int windowMode)
 {
-	SDL_SetWindowFullscreen(window, is_fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
+	switch (windowMode) {
+	case 0:
+		SDL_SetWindowFullscreen(window, 0);
+		break;
+	case 1:
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+		break;
+	case 2:
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		break;
+	}
 }
 
 void D3D11Renderer::Shutdown()

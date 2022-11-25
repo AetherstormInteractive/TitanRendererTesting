@@ -1,6 +1,6 @@
 #include "OpenGLRenderer.h"
 
-int OpenGLRenderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
+int OpenGLRenderer::Initialize(nlohmann::json configFile, int windowMode)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -35,7 +35,7 @@ int OpenGLRenderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 		return -1;
 	}
 
-	glViewport(0, 0, configFile["Display"]["Width"], configFile["Display"]["Height"]);
+	glViewport(0, 0, SDL_GetWindowSurface(window)->w, SDL_GetWindowSurface(window)->h);
 
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -72,9 +72,20 @@ int OpenGLRenderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
     return 0;
 }
 
-void OpenGLRenderer::Update(nlohmann::json configFile, bool is_fullscreen)
+void OpenGLRenderer::Update(nlohmann::json configFile, int windowMode)
 {
-	SDL_SetWindowFullscreen(window, is_fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
+	switch (windowMode) {
+	case 0:
+		SDL_SetWindowFullscreen(window, 0);
+		break;
+	case 1:
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+		break;
+	case 2:
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		break;
+	}
+
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 

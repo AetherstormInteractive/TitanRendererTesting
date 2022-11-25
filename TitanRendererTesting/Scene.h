@@ -22,7 +22,7 @@ class Scene
 {
 public:
 	json configFile;
-	bool is_fullscreen = false;
+	int windowMode = 0;
 
 	entt::registry registry;
 

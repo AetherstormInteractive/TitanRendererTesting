@@ -14,8 +14,8 @@
 class MetalRenderer : public Renderer
 {
 public:
-	int Initialize(nlohmann::json configFile, bool is_fullscreen);
-	void Update(nlohmann::json configFile, bool is_fullscreen);
+	int Initialize(nlohmann::json configFile, int windowMode);
+	void Update(nlohmann::json configFile, int windowMode);
 	void Shutdown();
 };
 #endif

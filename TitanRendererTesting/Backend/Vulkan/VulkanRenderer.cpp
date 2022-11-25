@@ -1,6 +1,6 @@
 #include "VulkanRenderer.h"
 
-int VulkanRenderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
+int VulkanRenderer::Initialize(nlohmann::json configFile, int windowMode)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -22,9 +22,19 @@ int VulkanRenderer::Initialize(nlohmann::json configFile, bool is_fullscreen)
 	return 0;
 }
 
-void VulkanRenderer::Update(nlohmann::json configFile, bool is_fullscreen)
+void VulkanRenderer::Update(nlohmann::json configFile, int windowMode)
 {
-	SDL_SetWindowFullscreen(window, is_fullscreen ? SDL_WINDOW_FULLSCREEN : 0);
+	switch (windowMode) {
+	case 0:
+		SDL_SetWindowFullscreen(window, 0);
+		break;
+	case 1:
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+		break;
+	case 2:
+		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		break;
+	}
 }
 
 void VulkanRenderer::Shutdown()
