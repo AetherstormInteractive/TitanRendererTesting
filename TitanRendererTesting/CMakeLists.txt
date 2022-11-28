@@ -3,7 +3,11 @@
 #
 cmake_minimum_required (VERSION 3.8)
 add_definitions(-DGLFW_INCLUDE_NONE)
-find_package(Vulkan REQUIRED)
+
+if (NOT APPLE) {
+	find_package(Vulkan REQUIRED)
+}
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMake/")
 
 # Add source to this project's executable.
