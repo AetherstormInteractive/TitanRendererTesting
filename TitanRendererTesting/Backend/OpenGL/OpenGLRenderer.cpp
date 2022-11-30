@@ -34,7 +34,6 @@ int OpenGLRenderer::Initialize(nlohmann::json configFile, int windowMode)
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
-
 	glViewport(0, 0, SDL_GetWindowSurface(window)->w, SDL_GetWindowSurface(window)->h);
 
 	glGenBuffers(1, &VBO);
@@ -74,6 +73,7 @@ int OpenGLRenderer::Initialize(nlohmann::json configFile, int windowMode)
 
 void OpenGLRenderer::Update(nlohmann::json configFile, int windowMode)
 {
+	glViewport(0, 0, SDL_GetWindowSurface(window)->w, SDL_GetWindowSurface(window)->h);
 	switch (windowMode) {
 	case 0:
 		SDL_SetWindowFullscreen(window, 0);
