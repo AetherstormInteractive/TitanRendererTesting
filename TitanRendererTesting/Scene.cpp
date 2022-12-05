@@ -42,7 +42,8 @@ void Scene::SceneUpdate()
 {
 	while (!quit) 
 	{
-		api->Update(configFile, windowMode);
+		api->Draw();
+		api->Update(0, windowMode);
 
 		processInput();
 	}

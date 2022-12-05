@@ -11,7 +11,8 @@ class Renderer
 {
 public:
 	virtual int Initialize(nlohmann::json configFile, int windowMode) = 0;
-	virtual void Update(nlohmann::json configFile, int windowMode) = 0;
+	virtual void Update(float deltaTime, int windowMode) = 0;
+	virtual void Draw() = 0;
 	virtual void Shutdown() = 0;
 
 	SDL_Window* window = nullptr;

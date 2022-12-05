@@ -22,7 +22,7 @@ int MetalRenderer::Initialize(nlohmann::json configFile, int windowMode)
 	return 0;
 }
 
-void MetalRenderer::Update(nlohmann::json configFile, int windowMode)
+void MetalRenderer::Update(float deltaTime, int windowMode)
 {
 	switch (windowMode) {
 	case 0:
@@ -35,6 +35,11 @@ void MetalRenderer::Update(nlohmann::json configFile, int windowMode)
 		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 		break;
 	}
+}
+
+void MetalRenderer::Draw()
+{
+
 }
 
 void MetalRenderer::Shutdown()

@@ -22,7 +22,7 @@ int SDL2Renderer::Initialize(nlohmann::json configFile, int windowMode)
 	return 0;
 }
 
-void SDL2Renderer::Update(nlohmann::json configFile, int windowMode)
+void SDL2Renderer::Update(float deltaTime, int windowMode)
 {
 	switch (windowMode) {
 	case 0:
@@ -35,6 +35,11 @@ void SDL2Renderer::Update(nlohmann::json configFile, int windowMode)
 		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 		break;
 	}
+}
+
+void SDL2Renderer::Draw()
+{
+
 }
 
 void SDL2Renderer::Shutdown()

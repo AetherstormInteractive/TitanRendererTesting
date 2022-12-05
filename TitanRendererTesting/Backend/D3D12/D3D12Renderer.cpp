@@ -22,7 +22,7 @@ int D3D12Renderer::Initialize(nlohmann::json configFile, int windowMode)
 	return 0;
 }
 
-void D3D12Renderer::Update(nlohmann::json configFile, int windowMode)
+void D3D12Renderer::Update(float deltaTime, int windowMode)
 {
 	switch (windowMode) {
 	case 0:
@@ -35,6 +35,11 @@ void D3D12Renderer::Update(nlohmann::json configFile, int windowMode)
 		SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 		break;
 	}
+}
+
+void D3D12Renderer::Draw()
+{
+
 }
 
 void D3D12Renderer::Shutdown()

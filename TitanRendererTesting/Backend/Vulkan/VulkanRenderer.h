@@ -14,7 +14,8 @@ class VulkanRenderer : public Renderer
 {
 public:
 	int Initialize(nlohmann::json configFile, int windowMode);
-	void Update(nlohmann::json configFile, int windowMode);
+	void Update(float deltaTime, int windowMode);
+	void Draw();
 	void Shutdown();
 };
 #endif

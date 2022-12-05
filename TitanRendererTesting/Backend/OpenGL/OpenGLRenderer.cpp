@@ -71,7 +71,7 @@ int OpenGLRenderer::Initialize(nlohmann::json configFile, int windowMode)
     return 0;
 }
 
-void OpenGLRenderer::Update(nlohmann::json configFile, int windowMode)
+void OpenGLRenderer::Update(float deltaTime, int windowMode)
 {
 	glViewport(0, 0, SDL_GetWindowSurface(window)->w, SDL_GetWindowSurface(window)->h);
 	switch (windowMode) {
@@ -86,13 +86,17 @@ void OpenGLRenderer::Update(nlohmann::json configFile, int windowMode)
 		break;
 	}
 
+	SDL_GL_SwapWindow(window);
+}
+
+void OpenGLRenderer::Draw()
+{
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glUseProgram(shaderProgram);
 	glBindVertexArray(VAO);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
-	SDL_GL_SwapWindow(window);
 }
 
 void OpenGLRenderer::Shutdown()
