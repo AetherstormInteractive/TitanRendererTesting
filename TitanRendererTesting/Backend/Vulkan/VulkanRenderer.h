@@ -55,6 +55,8 @@ public:
 	VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 	void createSwapchain();
 	std::vector<const char*> getRequiredExtensions();
+	void createImageViews();
+	void CreateGraphicsPipeline();
 
 	int Initialize(nlohmann::json configFile, int windowMode);
 	void Update(float deltaTime, int windowMode);
@@ -84,8 +86,9 @@ private:
 	VkFormat swapChainImageFormat;
 	VkExtent2D swapChainExtent;
 
-	VkDevice device;
+	std::vector<VkImageView> swapChainImageViews;
 
+	VkDevice device;
 	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
 	VkPhysicalDeviceProperties deviceProperties{};
 	VkPhysicalDeviceFeatures deviceFeatures{};
