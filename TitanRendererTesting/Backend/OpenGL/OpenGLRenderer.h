@@ -24,11 +24,11 @@ public:
 	void Draw();
 	void Shutdown();
 private:
-float vertices[9] = {
-	-0.5f, -0.5f, 0.0f,
-	 0.5f, -0.5f, 0.0f,
-	 0.0f,  0.5f, 0.0f
-	};
+	float vertices[9] = {
+		-0.5f, -0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f,
+		 0.0f,  0.5f, 0.0f
+		};
 
 	const char* vertexShaderSource = "#version 330 core\n"
 		"layout (location = 0) in vec3 aPos;\n"
@@ -49,8 +49,8 @@ float vertices[9] = {
 
 	unsigned int shaderProgram;
 
-	unsigned int VBO;
-	unsigned int VAO;
+	unsigned int vertexBuffer;
+	unsigned int vertexArray;
 
 	SDL_GLContext gContext;
 };

@@ -38,6 +38,7 @@ public:
 
 	Scene()
 	{
+		//open config file and select backend
 		std::ifstream i(configPath);
 		i >> configFile;
 

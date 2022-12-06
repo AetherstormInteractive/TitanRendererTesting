@@ -4,6 +4,7 @@ SDL_Event e;
 bool quit = false;
 
 void Scene::processInput() {
+	//base window commands
 	while (SDL_PollEvent(&e))
 	{
 		if (e.type == SDL_QUIT)
@@ -30,6 +31,7 @@ void Scene::processInput() {
 
 int Scene::SceneStart()
 {
+	//initialize window and chosen api
 	std::ifstream i(configPath);
 	i >> configFile;
 	windowMode = configFile["Display"]["WindowMode"];
@@ -42,6 +44,7 @@ void Scene::SceneUpdate()
 {
 	while (!quit) 
 	{
+		//call backend draw and update while processing basic window commands
 		api->Draw();
 		api->Update(0, windowMode);
 
@@ -51,6 +54,7 @@ void Scene::SceneUpdate()
 
 int Scene::SceneEnd()
 {
+	//destroy all entities
 	for (int i = 0; i <= sizeof(entities); i++)
 	{
 		if (!entities.empty())
@@ -59,8 +63,7 @@ int Scene::SceneEnd()
 		}
 	}
 
-	//Quit SDL subsystem
-
+	//destroy renderer and shutdown sdl2
 	api->Shutdown();
 
 	return 0;

@@ -2,11 +2,13 @@
 
 int OpenGLRenderer::Initialize(nlohmann::json configFile, int windowMode)
 {
+	//init sdl2
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 	}
 
+	//sdl load openGL library
 	SDL_GL_LoadLibrary(NULL);
 	// Request an OpenGL 4.5 context (should be core)
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
@@ -16,8 +18,10 @@ int OpenGLRenderer::Initialize(nlohmann::json configFile, int windowMode)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
+	//create window at center screen with openGL context
 	window = SDL_CreateWindow("OpenGL Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, configFile["Display"]["Width"], configFile["Display"]["Height"], SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
+	//window nullcheck
 	if (window == NULL)
 	{
 		std::cout << "ERROR: No OpenGL API Found!" << std::endl;
@@ -28,44 +32,48 @@ int OpenGLRenderer::Initialize(nlohmann::json configFile, int windowMode)
 		std::cout << "OpenGL Initialization" << std::endl;
 	}
 
+	//set opengl context using sdl2
 	gContext = SDL_GL_CreateContext(window);
+	//load opengl extensions using glad
 	if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
 	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
+		std::cout << "GLAD Initialization Failed!" << std::endl;
 		return -1;
 	}
+
+	//set opengl viewport
 	glViewport(0, 0, SDL_GetWindowSurface(window)->w, SDL_GetWindowSurface(window)->h);
 
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//generate vertexBuffer and load vertices array
+	glGenBuffers(1, &vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
+	//create shader objects
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+	//compile fragment and vertex shaders
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	glCompileShader(vertexShader);
 
-	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
 	glCompileShader(fragmentShader);
 
+	//create shader program
 	shaderProgram = glCreateProgram();
 
+	//link both shaders to program and use program
 	glAttachShader(shaderProgram, vertexShader);
 	glAttachShader(shaderProgram, fragmentShader);
 	glLinkProgram(shaderProgram);
-
-	// 1. then set the vertex attributes pointers
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	// 2. use our shader program when we want to render an object
 	glUseProgram(shaderProgram);
 
-	glGenVertexArrays(1, &VAO);
+	//generate vertex arrays
+	glGenVertexArrays(1, &vertexArray);
+	glBindVertexArray(vertexArray);
 
-	// 1. bind Vertex Array Object
-	glBindVertexArray(VAO);
-	// 2. copy our vertices array in a buffer for OpenGL to use
-	// 3. then set our vertex attributes pointers
+	//set vertex attributes and enable vertexArray
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
     return 0;
@@ -73,7 +81,10 @@ int OpenGLRenderer::Initialize(nlohmann::json configFile, int windowMode)
 
 void OpenGLRenderer::Update(float deltaTime, int windowMode)
 {
+	//update gl viewport
 	glViewport(0, 0, SDL_GetWindowSurface(window)->w, SDL_GetWindowSurface(window)->h);
+
+	//set window mode
 	switch (windowMode) {
 	case 0:
 		SDL_SetWindowFullscreen(window, 0);
@@ -86,23 +97,34 @@ void OpenGLRenderer::Update(float deltaTime, int windowMode)
 		break;
 	}
 
+	//swap sdl2 buffers for opengl
 	SDL_GL_SwapWindow(window);
 }
 
 void OpenGLRenderer::Draw()
 {
+	//create background color
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	//set shader program, vertex array, and draw all
 	glUseProgram(shaderProgram);
-	glBindVertexArray(VAO);
+	glBindVertexArray(vertexArray);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 void OpenGLRenderer::Shutdown()
 {
+	//delete opengl shaders
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
+
+	//clear vertex array and buffers
+	glDeleteVertexArrays(1, &vertexArray);
+	glDeleteBuffers(1, &vertexBuffer);
+	glDeleteProgram(shaderProgram);
+
+	//destroy sdl2
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
