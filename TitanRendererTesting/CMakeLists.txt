@@ -17,7 +17,7 @@ IF(UNIX)
 	"Backend/SDL2/SDL2Renderer.cpp" "Backend/SDL2/SDL2Renderer.h"
 	"DefaultComponents.h")
 
-	target_link_libraries(TitanRendererTesting nlohmann_json EnTT glm tinyobjloader SDL2::SDL2 SDL2::SDL2main)
+	target_link_libraries(TitanRendererTesting nlohmann_json EnTT glm tinyobjloader SDL3)
 elseif(NOT APPLE)
 	find_package(Vulkan REQUIRED)
 	add_executable (TitanRendererTesting "Scene.cpp" "Scene.h" "main.cpp" "../3rdparty/glad/src/glad.c"  
