@@ -1,2 +1,0 @@
-/Users/andrewcrane/Documents/TitanRendererTesting/build/3rdparty/sdl2/CMakeFiles/CheckOBJC/CMakeFiles/edit_cache.dir
-/Users/andrewcrane/Documents/TitanRendererTesting/build/3rdparty/sdl2/CMakeFiles/CheckOBJC/CMakeFiles/rebuild_cache.dir
