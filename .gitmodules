@@ -18,4 +18,4 @@
 	url = https://github.com/AetherstormRepo/stb
 [submodule "3rdparty/sdl2"]
 	path = 3rdparty/sdl2
-	url = https://github.com/libsdl-org/SDL
+	url = https://github.com/AetherstormRepo/titansdl2
