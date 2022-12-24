@@ -13,7 +13,8 @@ IF(APPLE)
 	"Backend/OpenGL/OpenGLRenderer.cpp" "Backend/OpenGL/OpenGLRenderer.h"
 	"Backend/Metal/MetalRenderer.cpp" "Backend/Metal/MetalRenderer.h"
 	"Backend/SDL2/SDL2Renderer.cpp" "Backend/SDL2/SDL2Renderer.h"
-	"DefaultComponents.h")
+	"DefaultComponents.h"
+	"AssetSystem.cpp" "AssetSystem.h")
 
 	target_link_libraries(TitanRendererTesting nlohmann_json EnTT assimp glm tinyobjloader SDL2 SDL2main)
 elseif(NOT APPLE)
@@ -25,7 +26,8 @@ elseif(NOT APPLE)
 	"Backend/D3D12/D3D12Renderer.cpp" "Backend/D3D12/D3D12Renderer.h"
 	"Backend/Vulkan/VulkanRenderer.cpp" "Backend/Vulkan/VulkanRenderer.h" 
 	"Backend/SDL2/SDL2Renderer.cpp" "Backend/SDL2/SDL2Renderer.h"
-	"DefaultComponents.h")
+	"DefaultComponents.h"
+	"AssetSystem.cpp" "AssetSystem.h")
 
 	target_link_libraries(TitanRendererTesting Vulkan::Vulkan nlohmann_json EnTT assimp glm tinyobjloader SDL2 SDL2main)
 	endif()
