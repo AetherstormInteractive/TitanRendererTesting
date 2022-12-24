@@ -10,9 +10,9 @@
 #include "Backend/OpenGL/OpenGLRenderer.h"
 #if defined (WIN32) || defined(LINUX)
 #include "Backend/Vulkan/VulkanRenderer.h"
-#endif
 #include "Backend/D3D11/D3D11Renderer.h"
 #include "Backend/D3D12/D3D12Renderer.h"
+#endif
 #include "Backend/SDL2/SDL2Renderer.h"
 #if defined (APPLE)
 #include "Backend/Metal/MetalRenderer.h"
@@ -32,11 +32,11 @@ public:
 
 	Renderer* api = nullptr;
 	OpenGLRenderer* openglrenderer = new OpenGLRenderer();
-	#if defined (WIN32) || defined(LINUX)
+#if defined (WIN32) || defined(LINUX)
 	VulkanRenderer* vulkanrenderer = new VulkanRenderer();
-	#endif
 	D3D11Renderer* d3d11renderer = new D3D11Renderer();
 	D3D12Renderer* d3d12renderer = new D3D12Renderer();
+#endif
 	SDL2Renderer* sdl2renderer = new SDL2Renderer();
 #if defined (APPLE)
 	MetalRenderer* metalrenderer = new MetalRenderer();
@@ -54,12 +54,11 @@ public:
 		{
 			api = openglrenderer;
 		}
-		#if defined (WIN32) || defined(LINUX)
+#if defined (WIN32) || defined(LINUX)
 		else if (configFile["Display"]["Backend"] == "Vulkan")
 		{
 			api = vulkanrenderer;
 		}
-		#endif
 		else if (configFile["Display"]["Backend"] == "DirectX11")
 		{
 			api = d3d11renderer;
@@ -68,6 +67,7 @@ public:
 		{
 			api = d3d12renderer;
 		}
+#endif
 #if defined (APPLE)
 		else if (configFile["Display"]["Backend"] == "Metal")
 		{
