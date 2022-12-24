@@ -1,6 +1,6 @@
 ﻿#ifndef SCENE_H
 #define SCENE_H
-#define APPLE
+//#define APPLE
 #include <iostream>
 #include <fstream>
 

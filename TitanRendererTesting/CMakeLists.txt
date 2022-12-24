@@ -29,7 +29,7 @@ elseif(NOT APPLE)
 	"Backend/SDL2/SDL2Renderer.cpp" "Backend/SDL2/SDL2Renderer.h"
 	"DefaultComponents.h")
 
-	target_link_libraries(TitanRendererTesting Vulkan::Vulkan nlohmann_json EnTT glm tinyobjloader SDL3)
+	target_link_libraries(TitanRendererTesting Vulkan::Vulkan nlohmann_json EnTT glm tinyobjloader SDL2 SDL2main)
 	endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/3rdparty/stb ${CMAKE_SOURCE_DIR}/3rdparty/glad/include)

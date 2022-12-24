@@ -12,9 +12,9 @@
 #include <algorithm>
 
 #define SDL_MAIN_HANDLED
-#include <SDL3/SDL.h>
-#include <SDL3/SDL_syswm.h>
-#include <SDL3/SDL_vulkan.h>
+#include <SDL.h>
+#include <SDL_syswm.h>
+#include <SDL_vulkan.h>
 
 #include <vulkan/vulkan.h>
 #define VK_USE_PLATFORM_WIN32_KHR
