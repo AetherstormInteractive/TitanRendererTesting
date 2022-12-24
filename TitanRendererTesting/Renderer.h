@@ -3,7 +3,7 @@
 
 #include <cstdio>
 #include <iostream>
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #undef main
 #include <nlohmann/json.hpp>
 

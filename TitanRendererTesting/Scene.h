@@ -36,7 +36,9 @@ public:
 	D3D11Renderer* d3d11renderer = new D3D11Renderer();
 	D3D12Renderer* d3d12renderer = new D3D12Renderer();
 	SDL2Renderer* sdl2renderer = new SDL2Renderer();
+#if defined (APPLE)
 	MetalRenderer* metalrenderer = new MetalRenderer();
+#endif
 
 	std::string configPath = "config/engineConfig.ini";
 
@@ -64,10 +66,12 @@ public:
 		{
 			api = d3d12renderer;
 		}
+#if defined (APPLE)
 		else if (configFile["Display"]["Backend"] == "Metal")
 		{
 			api = metalrenderer;
 		}
+#endif
 		else if (configFile["Display"]["Backend"] == "SDL2")
 		{
 			api = sdl2renderer;

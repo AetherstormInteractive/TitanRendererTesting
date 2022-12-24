@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include <glad/glad.h>
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #undef main
 
 #include <glm/glm.hpp>

@@ -12,12 +12,11 @@
 #include <algorithm>
 
 #define SDL_MAIN_HANDLED
-#include <SDL.h>
-#include <SDL_syswm.h>
-#include <SDL_vulkan.h>
+#include <SDL3/SDL.h>
+#include <SDL3/SDL_syswm.h>
+#include <SDL3/SDL_vulkan.h>
 
 #include <vulkan/vulkan.h>
-#include <vulkan/vulkan_win32.h>
 #define VK_USE_PLATFORM_WIN32_KHR
 
 #include <nlohmann/json.hpp>
