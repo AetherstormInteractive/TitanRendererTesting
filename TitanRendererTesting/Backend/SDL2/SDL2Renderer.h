@@ -1,7 +1,7 @@
 #ifndef SDL2_RENDERER_H
 #define SDL2_RENDERER_H
 
-#include <SDL3/SDL.h>
+#include <SDL.h>
 #undef main
 
 #include <nlohmann/json.hpp>

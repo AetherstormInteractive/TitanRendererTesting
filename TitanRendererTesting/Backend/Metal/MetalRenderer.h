@@ -4,7 +4,7 @@
 #include <cstdio>
 #include <iostream>
 
-#include <SDL3/SDL.h>
+#include <SDL.h>
 #undef main
 
 #include <nlohmann/json.hpp>

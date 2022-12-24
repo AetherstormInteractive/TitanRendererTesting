@@ -11,7 +11,7 @@ add_subdirectory("3rdparty/glm")
 add_subdirectory("3rdparty/tinyobj")
 add_subdirectory("3rdparty/sdl2")
 
-set_target_properties(TitanRendererTesting nlohmann_json EnTT glm tinyobjloader SDL3 PROPERTIES
+set_target_properties(TitanRendererTesting nlohmann_json EnTT glm tinyobjloader SDL2 SDL2main PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib/$<CONFIG>"
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib/$<CONFIG>"
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/$<CONFIG>"

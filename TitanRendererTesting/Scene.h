@@ -1,6 +1,6 @@
 ﻿#ifndef SCENE_H
 #define SCENE_H
-
+#define APPLE
 #include <iostream>
 #include <fstream>
 
@@ -14,7 +14,9 @@
 #include "Backend/D3D11/D3D11Renderer.h"
 #include "Backend/D3D12/D3D12Renderer.h"
 #include "Backend/SDL2/SDL2Renderer.h"
+#if defined (APPLE)
 #include "Backend/Metal/MetalRenderer.h"
+#endif
 #include "Renderer.h"
 
 
