@@ -38,7 +38,7 @@ public:
 	SDL2Renderer* sdl2renderer = new SDL2Renderer();
 	MetalRenderer* metalrenderer = new MetalRenderer();
 
-	std::string configPath = "engineConfig.ini";
+	std::string configPath = "config/engineConfig.ini";
 
 	Scene()
 	{
