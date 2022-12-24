@@ -1,3 +1,5 @@
+#if defined (WIN32) || defined(LINUX)
+
 #include "VulkanRenderer.h"
 
 void VulkanRenderer::createInstance()
@@ -490,3 +492,4 @@ void VulkanRenderer::Shutdown()
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
+#endif

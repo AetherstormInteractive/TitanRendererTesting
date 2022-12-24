@@ -15,12 +15,6 @@ void Scene::processInput() {
 		{
 			switch (e.key.keysym.sym)
 			{
-			case SDLK_F5:
-				api->Shutdown();
-				api = nullptr;
-				api = vulkanrenderer;
-				api->Initialize(configFile, windowMode);
-				break;
 			case SDLK_F1:
 				quit = true;
 				break;

@@ -1,0 +1,149 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"3rdparty/tinyobj/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 118,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 128,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 135,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 140,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 145,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 151,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"/Users/andrewcrane/Documents/TitanRendererTesting/lib/Release/libtinyobjloader.2.0.0-rc.10.dylib",
+				"/Users/andrewcrane/Documents/TitanRendererTesting/lib/Release/libtinyobjloader.2.dylib"
+			],
+			"targetId" : "tinyobjloader::@2847f441ec1164a076b0",
+			"targetIndex" : 7,
+			"targetInstallNamelink" : "skip",
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"/Users/andrewcrane/Documents/TitanRendererTesting/lib/Release/libtinyobjloader.dylib"
+			],
+			"targetId" : "tinyobjloader::@2847f441ec1164a076b0",
+			"targetIndex" : 7,
+			"targetInstallNamelink" : "only",
+			"type" : "target"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "lib/tinyobjloader/cmake",
+			"exportName" : "tinyobjloader-targets",
+			"exportTargets" : 
+			[
+				{
+					"id" : "tinyobjloader::@2847f441ec1164a076b0",
+					"index" : 7
+				}
+			],
+			"paths" : 
+			[
+				"3rdparty/tinyobj/CMakeFiles/Export/ed38dc2cb1e14c44cc057c68af26fb32/tinyobjloader-targets.cmake"
+			],
+			"type" : "export"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "include",
+			"paths" : 
+			[
+				"3rdparty/tinyobj/tiny_obj_loader.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 4,
+			"component" : "Unspecified",
+			"destination" : "share/doc/tinyobjloader",
+			"paths" : 
+			[
+				"3rdparty/tinyobj/LICENSE"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 5,
+			"component" : "Unspecified",
+			"destination" : "lib/tinyobjloader/cmake",
+			"paths" : 
+			[
+				"build/3rdparty/tinyobj/tinyobjloader-config.cmake",
+				"build/3rdparty/tinyobj/tinyobjloader-config-version.cmake"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 6,
+			"component" : "Unspecified",
+			"destination" : "lib/pkgconfig",
+			"paths" : 
+			[
+				"build/3rdparty/tinyobj/tinyobjloader.pc"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "3rdparty/tinyobj",
+		"source" : "3rdparty/tinyobj"
+	}
+}

@@ -1,3 +1,5 @@
+#if defined(WIN32) || defined(LINUX) 
+
 #ifndef VULKAN_RENDERER_H
 #define VULKAN_RENDERER_H
 
@@ -96,4 +98,5 @@ private:
 	VkQueue graphicsQueue;
 	VkQueue presentQueue;
 };
+#endif
 #endif
