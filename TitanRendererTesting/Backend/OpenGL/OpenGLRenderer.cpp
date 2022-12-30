@@ -1,5 +1,41 @@
 #include "OpenGLRenderer.h"
 
+void OpenGLRenderer::loadShader(const char* vertexpath, const char* fragmentpath)
+{
+	std::string vertexline, vertextext;
+	std::ifstream vertexin(vertexpath);
+	while (std::getline(vertexin, vertexline))
+	{
+		vertextext += vertexline + "\n";
+	}
+	const char* vertexdata = vertextext.c_str();
+	vertexin.close();
+
+	std::string fragmentline, fragmenttext;
+	std::ifstream fragmentin(fragmentpath);
+	while (std::getline(fragmentin, fragmentline))
+	{
+		fragmenttext += fragmentline + "\n";
+	}
+	const char* fragmentdata = fragmenttext.c_str();
+	fragmentin.close();
+
+	vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+	glShaderSource(vertexShader, 1, &vertexdata, NULL);
+	glCompileShader(vertexShader);
+
+	glShaderSource(fragmentShader, 1, &fragmentdata, NULL);
+	glCompileShader(fragmentShader);
+
+
+	shaderProgram = glCreateProgram();
+	glAttachShader(shaderProgram, vertexShader);
+	glAttachShader(shaderProgram, fragmentShader);
+	glLinkProgram(shaderProgram);
+}
+
 int OpenGLRenderer::Initialize(nlohmann::json configFile, int windowMode)
 {
 	//init sdl2
@@ -44,30 +80,12 @@ int OpenGLRenderer::Initialize(nlohmann::json configFile, int windowMode)
 	//set opengl viewport
 	glViewport(0, 0, SDL_GetWindowSurface(window)->w, SDL_GetWindowSurface(window)->h);
 
+	loadShader("resources/shaders/opengl/shader.vert", "resources/shaders/opengl/shader.frag");
+
 	//generate vertexBuffer and load vertices array
 	glGenBuffers(1, &vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	//create shader objects
-	vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-	//compile fragment and vertex shaders
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
-
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-	glCompileShader(fragmentShader);
-
-	//create shader program
-	shaderProgram = glCreateProgram();
-
-	//link both shaders to program and use program
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
-	glUseProgram(shaderProgram);
 
 	//generate vertex arrays
 	glGenVertexArrays(1, &vertexArray);

@@ -3,6 +3,8 @@
 
 #include <cstdio>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 #include <glad/glad.h>
 #include <SDL.h>
@@ -20,6 +22,7 @@ class OpenGLRenderer : public Renderer
 {
 public:
 	int Initialize(nlohmann::json configFile, int windowMode);
+	void loadShader(const char* vertexpath, const char* fragmentpath);
 	void Update(float deltaTime, int windowMode);
 	void Draw();
 	void Shutdown();
@@ -29,20 +32,6 @@ private:
 		 0.5f, -0.5f, 0.0f,
 		 0.0f,  0.5f, 0.0f
 		};
-
-	const char* vertexShaderSource = "#version 450 core\n"
-		"layout (location = 0) in vec3 aPos;\n"
-		"void main()\n"
-		"{\n"
-		"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-		"}\0";
-
-	const char* fragmentShaderSource = "#version 450 core\n"
-		"out vec4 FragColor;\n"
-		"void main()\n"
-		"{\n"
-		"FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-		"}\0";
 
 	unsigned int vertexShader;
 	unsigned int fragmentShader;
